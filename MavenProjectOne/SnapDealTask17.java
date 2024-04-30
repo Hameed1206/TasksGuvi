@@ -16,9 +16,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+//Task 17 QUE 1
 public class SnapDealTask17 {
-//(//header[contains(text() , 'login/sign')]//parent::div//form//input)[1]
+
 	public static void main(String[] args) throws InterruptedException {
 		// Setup WebDriver using WebDriverManager for Chrome
         WebDriverManager.chromedriver().setup();
