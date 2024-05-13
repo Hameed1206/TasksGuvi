@@ -1,19 +1,27 @@
 package MavenFirst.MavenProjectOne;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.Duration;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.google.common.io.Files;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+//Task 22 QUE 1
 public class Task22Waits {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// Setup WebDriver using WebDriverManager for Chrome
         WebDriverManager.chromedriver().setup();
         // Initialize WebDriver instance
@@ -46,7 +54,7 @@ public class Task22Waits {
         WebElement sum = driver.findElement(By.xpath("//div//h4[contains(text() , ' ')]"));
         w.until(ExpectedConditions.visibilityOf(sum));
         String text = sum.getText();
-        System.out.println(text);
+        System.out.println("Sum text "+text);
         
         WebElement num1 = driver.findElement(By.id("numb1"));
         w.until(ExpectedConditions.visibilityOf(num1));
@@ -58,7 +66,7 @@ public class Task22Waits {
         int int1 = Integer.parseInt(value1);
         int int2 = Integer.parseInt(value2);
         int result = int1+int2;
-        System.out.println(result);
+        System.out.println("Sum output "+result);
         String string = Integer.toString(result);
         WebElement numbR = driver.findElement(By.id("number"));
         w.until(ExpectedConditions.visibilityOf(numbR));
@@ -67,7 +75,13 @@ public class Task22Waits {
         WebElement button = driver.findElement(By.id("demo"));
         w.until(ExpectedConditions.visibilityOf(button));
         button.click();
-        
+        Thread.sleep(3000);
+        String title = driver.getTitle();
+        String path = "C:\\Users\\91936\\eclipse-workspace\\MavenProjectOne\\src\\test\\java\\MavenFirst\\MavenProjectOne\\Task 22"+title+".jpg";
+        TakesScreenshot tk = (TakesScreenshot)driver;  
+        File file = tk.getScreenshotAs(OutputType.FILE);
+        Files.copy(file, new File(path));
+        driver.quit();
 	}
 
 }
